@@ -69,7 +69,7 @@ class Game: # создание основного классе
                     if event.key == pygame.K_d:
                         self.movement[1] = 1.5
                     if event.key == pygame.K_SPACE:
-                        self.player.velocity[1] = -3
+                        self.player.velocity[1] = -2.75
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_a:
                         self.movement[0] = 0

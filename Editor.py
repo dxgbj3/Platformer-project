@@ -43,6 +43,8 @@ class Editor: # создание основного классе
         while True:
             self.display.blit(self.assets['background'], (0, 0))
 
+            self.scroll[0] += (self.movement[1] - self.movement[0]) * 2
+            self.scroll[1] += (self.movement[3] - self.movement[2]) * 2
             render_scroll = (int(self.scroll[0]), int(self.scroll[1]))
 
             self.tilemap.render(self.display, offset=render_scroll)
@@ -53,6 +55,8 @@ class Editor: # создание основного классе
             mpos = pygame.mouse.get_pos()
             mpos = (mpos[0] / RENDER_SCALE, mpos[1] / RENDER_SCALE) # Это нужно, чтобы получить правильные координаты мышки поскольку я использую мудрёную систему увеличения всего экрана
             tile_pos = (int((mpos[0] + self.scroll[0]) // self.tilemap.tile_size), int((mpos[1] + self.scroll[1]) // self.tilemap.tile_size))
+
+            self.display.blit(current_tile_img, (tile_pos[0] * self.tilemap.tile_size - self.scroll[0], tile_pos[1] * self.tilemap.tile_size - self.scroll[1])) #
 
             if self.click:
                 self.tilemap.tilemap[str(tile_pos[0]) + ';' + str(tile_pos[1])] = {'type': self.tile_list[self.tile_group], 'variant': self.tile_variant, 'pos': tile_pos}
